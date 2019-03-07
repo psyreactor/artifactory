@@ -1,0 +1,18 @@
+<Server port="<%= node['artifactory']['shutdown_port'] %>" shutdown="SHUTDOWN">
+    <Service name="Catalina">
+        <Connector port="<%= node["artifactory"]["port"] %>" sendReasonPhrase="true"/>
+        <Connector port="8040" sendReasonPhrase="true" maxThreads="50"/>
+    <% if node['artifactory']['use_ajp'] %>
+        <Connector port="<%= node['artifactory']['ajp']['port'] %>" protocol="AJP/1.3" sendReasonPhrase="true"
+    maxThreads="<%= node['artifactory']['ajp']['maxThreads'] %>"
+    minSpareThreads="<%= node['artifactory']['ajp']['minSpareThreads'] %>"
+    enableLookups="<%= node['artifactory']['ajp']['enableLookups'] %>"
+    backlog="<%= node['artifactory']['ajp']['backlog'] %>"
+    />
+    <% end %>
+        <Engine name="Catalina" defaultHost="localhost">
+            <Host name="localhost" appBase="webapps" startStopThreads="2"/>
+        </Engine>
+
+    </Service>
+</Server>
