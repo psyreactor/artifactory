@@ -7,7 +7,7 @@ property :version, kind_of: String, required: true
 property :url, kind_of: String, required: true
 property :phase, kind_of: String, required: true, default: nil
 property :context, kind_of: String, required: true
-property :extencion, kind_of: String, required: true
+property :extension, kind_of: String, required: true
 property :protocol, kind_of: String, required: true, default: 'https'
 property :path, kind_of: String, required: true default: "#{Chef::Config[:file_cache_path]}/#{new_resource.name}"
 property :user, kind_of: String, required: false, identity: true, default: 'admin'
@@ -17,7 +17,7 @@ property :overwrite, kind_of: [TrueClass, FalseClass], default: false
 
 action_class do
   def filename
-    file = "#{new_resource.name}-#{new_resource.version}.#{new_resource.extencion}"
+    file = "#{new_resource.name}-#{new_resource.version}.#{new_resource.extension}"
   end
 
   def download_url
