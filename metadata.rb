@@ -4,7 +4,7 @@ maintainer_email 'marianilucas@gmail.com'
 license 'Apache-2.0'
 description 'Installs/Configures artifactory'
 long_description 'Installs/Configures artifactory'
-version '0.1.1'
+version '0.2.0'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 supports 'centos'
 

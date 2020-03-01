@@ -2,7 +2,7 @@
 
 This cookbook install artifactory from binary source.
 
-####[Artifactory](https://jfrog.com/artifactory)
+#### [Artifactory](https://jfrog.com/artifactory)
 JFrog is revolutionizing the software world with the practice of Continuous Update, with a speed and continuity that forever changes the way organizations manage and release software.
 
 Requirements
@@ -75,6 +75,40 @@ Recipes
 | node['artifactory']['ldap']['managerPassword'] | Ldap Binding user Password | nil |
 | node['artifactory']['ldap']['autoCreateUser'] | Create user in Actifactory | false |
 | node['artifactory']['ldap']['emailAttribute'] | Ldap User email attribute | 'email' |
+
+# Custom Resources
+
+## Artifact
+
+### Download artifact from artifctory 
+
+artifactory_artifact
+|Propetie | Type   | Required | Default |
+|---------|--------|----------|---------|
+|name     | String | true     |         |
+|version  | String | true     |         |
+|url      | String | true     |         |
+|phase    | String | true     | nil     |
+|context  | String | true     |         |
+|extencion| String | true     |         |
+|protocol | String | true     | 'https' |
+|path     | String | true     | "#{Chef::Config[:file_cache_path]}/#{new_resource.name}" |
+|user     | String | false    | 'admin' |
+|password | String | false    | 'password'|
+|overwrite| Boolean| true     | false   |
+
+```
+artifactory_artifact 'commons-tools' do
+  version '1.0'
+  protocol 'https'
+  url 'artifactory.com/artifactory'
+  context 'com/artifact/publish'
+  phase 'snapshot'
+  user user_artifactory
+  password password_artifactory
+  path '/var/lib/artifact'
+end
+```
 
 ## Usage
 

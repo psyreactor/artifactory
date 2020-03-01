@@ -2,8 +2,6 @@ resource_name :artifactory_adminpass
 
 default_action :update
 
-property :name, kind_of: String, name_attribute: true
-property :password, kind_of: String, required: true
 property :api_user, kind_of: String, required: false, identity: true, default: 'admin'
 property :api_password, kind_of: String, required: false, identity: true, default: 'password'
 property :api_server, kind_of: String, default: 'http://localhost:8081/artifactory/api'
@@ -13,14 +11,14 @@ action_class do
 
   def change_pass?
     begin
-     resp = RestClient::Resource.new(new_resource.api_server,'admin',new_resource.password)['/api/security/users/admin'].get
+     resp = RestClient::Resource.new(new_resource.api_server,'admin','password')['/api/security/users/admin'].get
      if resp.body.nil?
-       true
+      false
      else
-       ! resp.body.include?('admin')
+      resp.body.include?('admin')
      end
     rescue RestClient::ExceptionWithResponse => e
-     true
+     false
     end
   end
 
