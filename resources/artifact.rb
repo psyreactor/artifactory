@@ -9,7 +9,7 @@ property :phase, kind_of: String, required: true, default: nil
 property :context, kind_of: String, required: true, default: nil
 property :extension, kind_of: String, required: true
 property :protocol, kind_of: String, required: true, default: 'https'
-property :path, kind_of: String, required: true default: "#{Chef::Config[:file_cache_path]}/#{new_resource.name}"
+property :path, kind_of: String, required: true, default: "#{Chef::Config[:file_cache_path]}/#{new_resource.name}"
 property :user, kind_of: String, required: false, identity: true, default: 'admin'
 property :password, kind_of: String, required: false, identity: true, default: 'password'
 property :overwrite, kind_of: [TrueClass, FalseClass], default: false
